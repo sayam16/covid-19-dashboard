@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: ../backend
+    env_file:
+      - ../backend/.env.example
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend:/app
+
+  frontend:
+    build:
+      context: ../frontend
+    env_file:
+      - ../frontend/.env.example
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ../frontend:/app
