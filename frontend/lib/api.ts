@@ -100,11 +100,11 @@ export interface TrendResponse {
 }
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
-if (!BASE) {
-  throw new Error("NEXT_PUBLIC_API_BASE_URL is not set.");
-}
 
 async function apiFetch<T>(path: string): Promise<T> {
+  if (!BASE) {
+    throw new Error("NEXT_PUBLIC_API_BASE_URL is not set.");
+  }
   const response = await fetch(`${BASE}${path}`, {
     next: { revalidate: 180 }
   });
